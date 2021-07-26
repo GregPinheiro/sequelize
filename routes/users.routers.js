@@ -6,6 +6,7 @@ router.get('/login', userController.loginPage);
 router.get('/senha/:password?', userController.senha);
 router.get('/usuarios', userController.index);
 router.post('/usuario', userController.oneUser);
+router.get('/create', userController.create);
 
 module.exports = router;
 

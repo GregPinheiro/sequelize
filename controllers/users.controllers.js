@@ -10,7 +10,13 @@ const userController = {
     },
     index: async (req, res) => {
         try{
-            let users = await Usuario.findAll();
+            let users = await Usuario.findAll({
+                order: [ 
+                    ['ID', 'DESC']
+                ],
+                limit: 1,
+                offset: 1
+            });
             res.render('usuarios', {users});
         } catch(error) {
             console.log(`Error: ${error}`);
@@ -25,6 +31,19 @@ const userController = {
             res.render('usuario', { user });
         } catch(error) {
             console.log(`Error: ${error}`);
+        }
+    },
+    create: async (req, res) => {
+        try{
+            Usuario.create({
+                nome: 'greg',
+                email: 'greg@email.com',
+                senha: '1234'
+            })
+
+            res.send('Usuario criado com sucesso!')
+        } catch(error) {
+            res.send(`Error: ${error}`)
         }
     }
 }
